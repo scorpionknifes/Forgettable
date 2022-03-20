@@ -82,6 +82,15 @@ function Home() {
     setIsHover(false);
   };
 
+  const handleEncounterCardClick = (encounter) => {
+    navigate(
+        '/encounters',
+        {state: {
+          encounter: encounter,
+        }},
+    );
+  };
+
   return (
     <>
       {isHover && <SummaryDrawer summaryInfo={selectedInfo} />}
@@ -147,7 +156,7 @@ function Home() {
           </div>
 
           <div className={classes.home_subtitleContainer}>
-            <div className={classes.home_subtitle}>Recently Encounters</div>
+            <div className={classes.home_subtitle}>Recent Encounters</div>
             <Link to="/encounters" style={{textDecoration: 'none'}}><CustomButton btnText='View All' /></Link>
           </div>
 
@@ -162,7 +171,9 @@ function Home() {
                     firstMet={encounter.title}
                     img={encounter.persons[0]?.image}
                     location={encounter.location}
-                    onClick={() => navigate(`/encounters`)}
+                    onClick={() => {
+                      handleEncounterCardClick(encounter);
+                    }}
                   />
                 </div>);
             })}
